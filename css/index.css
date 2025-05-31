@@ -2,13 +2,11 @@ html, body {
   width: 100%;
   height: 100%;
   margin: 0;
-  background: #121212;
-  color: #E0E0E0;
   font-family: 'Helvetica', 'Arial', sans-serif;
   font-size: 23px;
   font-weight: 100;
   line-height: 1.5;
-
+  background: var(--background);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,7 +23,7 @@ html, body {
   padding: 20px 20px 20px 20px;
   width: calc(100% - 50px);
   text-align: center;
-  border: 5px solid #E0E0E0;
+  border: 5px solid #000000;
   border-radius: 50px;
   margin-bottom: 50px;
 }
@@ -40,9 +38,26 @@ h1 {
 }
 
 a {
-  color: #00FF85;
+  color: #0A69DA;
   position: relative;
   top: 0px;
   text-decoration: underline;
 }
 
+:root[color-theme='light'] {
+  background: #ffffff;
+  Color: #000000;
+}
+
+:root[color-theme='dark'] {
+  background: #121212;
+  Color: #e0e0e0;
+}
+
+:root[color-theme='dark'] #content {
+  border: 5px solid #e0e0e0;
+}
+
+:root[color-theme='dark'] a {
+  Color: #4593F8;
+}
