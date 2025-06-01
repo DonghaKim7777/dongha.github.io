@@ -1,27 +1,20 @@
-const $checkbox = document.querySelector('.check');
+ const $toggle = document.querySelector('.toggle-input');
 
-const isUserColorTheme = localStorage.getItem('color-theme');
-const isOsColorTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const isUserColorTheme = localStorage.getItem('color-theme');
+    const isOsColorTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const getUserTheme = () => isUserColorTheme ? isUserColorTheme : isOsColorTheme;
 
-const getUserTheme = () => isUserColorTheme ? isUserColorTheme : isOsColorTheme;
+    function applyTheme(theme) {
+      localStorage.setItem('color-theme', theme);
+      document.documentElement.setAttribute('color-theme', theme);
+      $toggle.checked = theme === 'dark';
+    }
 
-window.onload = function() {
-  if (getUserTheme === 'dark') {
-    localStorage.setItem('color-theme', 'dark');
-    document.documentElement.setAttribute('color-theme', 'dark');
-    $checkbox.setAttribute('checked', true)
-  } else {
-    localStorage.setItem('color-theme', 'light');
-    document.documentElement.setAttribute('color-theme', 'light');
-  }
-}
+    window.onload = function () {
+      applyTheme(getUserTheme());
+    }
 
-$checkbox.addEventListener('click', e=> {
-  if (e.target.checked) {
-    localStorage.setItem('color-theme', 'light');
-    document.documentElement.setAttribute('color-theme', 'dark');
-  } else {
-    localStorage.setItem('color-theme', 'light');
-    document.documentElement.setAttribute('color-theme', 'light');
-  }
-});
+    $toggle.addEventListener('change', (e) => {
+      const isDark = e.target.checked;
+      applyTheme(isDark ? 'dark' : 'light');
+    });

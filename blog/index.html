@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script>
+    const theme = localStorage.getItem('color-theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const finalTheme = theme ? theme : (prefersDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('color-theme', finalTheme);
+  </script>
   <meta charset="UTF-8">
-  <title>Blog</title>
-  <link rel="stylesheet" href="../css/index.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dongha's Website</title>
+  <link rel="stylesheet" href="/css/index.css">
+  <script defer src="/js/theme-toggle.js"></script>
 </head>
 <body>
   <div id="header">
+    <input type="checkbox" class="toggle-input" id="toggle" />
+		<label class="toggle-label" for="toggle"></label>
   </div>
   <div id="content">
     <h1>Blog</h1>

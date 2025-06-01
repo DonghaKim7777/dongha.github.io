@@ -11,6 +11,7 @@ html, body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #header, #content {
@@ -42,6 +43,45 @@ a {
   position: relative;
   top: 0px;
   text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.toggle-input {
+    display: none;
+}
+
+.toggle-label {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    display: block;
+    width: 40px;
+    height: 24px;
+    background-color: #ccc;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 9999;
+}
+
+.toggle-label::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.toggle-input:checked + .toggle-label {
+    background-color: #4caf50;
+}
+
+.toggle-input:checked + .toggle-label::before {
+    transform: translateX(16px);
 }
 
 :root[color-theme='light'] {
