@@ -1,20 +1,31 @@
- const $toggle = document.querySelector('.toggle-input');
+const toggleBtn = document.getElementById('theme-toggle');
+const sunIcon = document.getElementById('icon-sun');
+const moonIcon = document.getElementById('icon-moon');
 
-    const isUserColorTheme = localStorage.getItem('color-theme');
-    const isOsColorTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    const getUserTheme = () => isUserColorTheme ? isUserColorTheme : isOsColorTheme;
+function applyTheme(theme) {
+  localStorage.setItem('color-theme', theme);
+  document.documentElement.setAttribute('color-theme', theme);
+  if (theme === 'dark') {
+    sunIcon.style.display = 'none';
+    moonIcon.style.display = 'inline';
+  } else {
+    sunIcon.style.display = 'inline';
+    moonIcon.style.display = 'none';
+  }
+}
 
-    function applyTheme(theme) {
-      localStorage.setItem('color-theme', theme);
-      document.documentElement.setAttribute('color-theme', theme);
-      $toggle.checked = theme === 'dark';
-    }
+function getUserTheme() {
+  const saved = localStorage.getItem('color-theme');
+  if (saved) return saved;
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
 
-    window.onload = function () {
-      applyTheme(getUserTheme());
-    }
+toggleBtn.addEventListener('click', () => {
+  const currentTheme = document.documentElement.getAttribute('color-theme');
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  applyTheme(newTheme);
+});
 
-    $toggle.addEventListener('change', (e) => {
-      const isDark = e.target.checked;
-      applyTheme(isDark ? 'dark' : 'light');
-    });
+window.onload = () => {
+  applyTheme(getUserTheme());
+};

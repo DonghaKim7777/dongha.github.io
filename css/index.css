@@ -7,6 +7,7 @@ html, body {
   font-weight: 100;
   line-height: 1.5;
   background: var(--background);
+  color: var(--text-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,19 +15,34 @@ html, body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+:root[color-theme='light'] {
+  --background: #ffffff;
+  --text-color: #000000;
+  --border-color: #000000;
+  --link-color: #0A69DA;
+}
+
+:root[color-theme='dark'] {
+  --background: #121212;
+  --text-color: #e0e0e0;
+  --border-color: #e0e0e0;
+  --link-color: #4593F8;
+}
+
 #header, #content {
   width: 100%;
   max-width: 800px;
-  margin: 0;
+  margin: 0 auto;
 }
 
 #content {
-  padding: 20px 20px 20px 20px;
+  padding: 20px;
   width: calc(100% - 50px);
   text-align: center;
-  border: 5px solid #000000;
+  border: 5px solid var(--border-color);
   border-radius: 50px;
   margin-bottom: 50px;
+  transition: border-color 0.3s ease, color 0.3s ease;
 }
 
 h1 {
@@ -34,70 +50,71 @@ h1 {
   font-size: 40px;
   text-align: center;
   letter-spacing: 3px;
-  margin-top: 1;
+  margin-top: 1rem;
   margin-bottom: 0;
+  transition: color 0.3s ease;
+}
+
+p {
+  transition: color 0.3s ease;
 }
 
 a {
-  color: #0A69DA;
+  color: var(--link-color);
   position: relative;
   top: 0px;
   text-decoration: underline;
   transition: color 0.3s ease;
 }
 
-.toggle-input {
-    display: none;
+#back-button {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  background-color: transparent;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 9999;
+  transition: background-color 0.2s ease, color 0.3s ease;
+  color: var(--text-color);
 }
 
-.toggle-label {
-    position: fixed;
-    top: 16px;
-    right: 16px;
-    display: block;
-    width: 40px;
-    height: 24px;
-    background-color: #ccc;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    z-index: 9999;
+#back-button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
-.toggle-label::before {
-    content: "";
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 20px;
-    height: 20px;
-    background-color: white;
-    border-radius: 50%;
-    transition: transform 0.3s ease;
+#back-button svg {
+  stroke: currentColor;
+  width: 24px;
+  height: 24px;
 }
 
-.toggle-input:checked + .toggle-label {
-    background-color: #4caf50;
+#theme-toggle {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  color: var(--text-color);
+  transition:background-color 0.2s ease, color 0.3s ease;
+  z-index: 9999;
 }
 
-.toggle-input:checked + .toggle-label::before {
-    transform: translateX(16px);
+#theme-toggle:hover {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
-:root[color-theme='light'] {
-  background: #ffffff;
-  Color: #000000;
+:root[color-theme='dark'] #theme-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
-:root[color-theme='dark'] {
-  background: #121212;
-  Color: #e0e0e0;
-}
-
-:root[color-theme='dark'] #content {
-  border: 5px solid #e0e0e0;
-}
-
-:root[color-theme='dark'] a {
-  Color: #4593F8;
+#theme-toggle svg {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
 }
